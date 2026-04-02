@@ -1,8 +1,8 @@
 import React, { useState, useCallback, useRef, useEffect, useMemo } from 'react';
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    SHARED UI COMPONENTS
-   ═══════════════════════════════════════════════════════ */
+   âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 
 function SectionHeader({ icon, title }) {
   return (
@@ -41,9 +41,9 @@ function Card({ children, style }) {
   );
 }
 
-/* ═══════════════════════════════════════════════════════
-   TAPS RANGES — Profit First by Mike Michalowicz
-   ═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   TAPS RANGES â Profit First by Mike Michalowicz
+   âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 
 const TAPS_RANGES = [
   { label: '$0 - $250K',     min: 0,        max: 250000,    profit: 5,  owner: 50, tax: 15, opex: 30 },
@@ -62,9 +62,9 @@ function getTapsRange(gci) {
   return TAPS_RANGES[TAPS_RANGES.length - 1]; // fallback to highest
 }
 
-/* ═══════════════════════════════════════════════════════
-   WHO PILL — clickable pill that opens a dropdown
-   ═══════════════════════════════════════════════════════ */
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+   WHO PILL â clickable pill that opens a dropdown
+   âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 
 const WHO_OPTIONS = ['Agent', 'Bookkeeper', 'CPA', 'Agent + CPA', 'Agent or Bookkeeper'];
 
@@ -110,7 +110,7 @@ function WhoPill({ value, onChange }) {
         }}
       >
         <span>{value || 'Select...'}</span>
-        <span style={{ fontSize: 10, color: '#999' }}>▼</span>
+        <span style={{ fontSize: 10, color: '#999' }}>â¼</span>
       </button>
 
       {open && (
@@ -199,15 +199,15 @@ function WhoPill({ value, onChange }) {
   );
 }
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    MAIN FINANCES COMPONENT
-   ═══════════════════════════════════════════════════════ */
+   âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 
 const Finances = ({ hubData, onSave }) => {
   const allData = hubData?.allData || {};
   const finances = allData?.finances || {};
 
-  /* ── Systems & Team from hub ── */
+  /* ââ Systems & Team from hub ââ */
   const hubSystems = hubData?.systems || [];
   const defaultSystems = [
     { id: 's1', name: 'CRM' }, { id: 's2', name: 'Email' }, { id: 's3', name: 'Phone' },
@@ -259,7 +259,7 @@ const Finances = ({ hubData, onSave }) => {
     { id: 6, frequency: 'ANNUALLY', responsible: 'Agent + CPA', text: 'Full year review. File taxes. Set new revenue goals. Update TAPS percentages. Cancel unused recurring expenses.' },
   ];
 
-  /* ── Initialize state ── */
+  /* ââ Initialize state ââ */
   const initGCI = finances.tapsGCI ? parseFloat(finances.tapsGCI) : '';
   const initCOS = finances.tapsCostOfSale ? parseFloat(finances.tapsCostOfSale) : '';
 
@@ -328,7 +328,7 @@ const Finances = ({ hubData, onSave }) => {
     });
   }, [debouncedSave]);
 
-  /* ── Computed values ── */
+  /* ââ Computed values ââ */
   const gciNum = parseFloat(localState.tapsGCI) || 0;
   const cosNum = parseFloat(localState.tapsCostOfSale) || 0;
   const netProfit = gciNum - cosNum;
@@ -343,7 +343,7 @@ const Finances = ({ hubData, onSave }) => {
     return (localState.team || []).reduce((sum, m) => sum + (parseFloat(m.monthlyAmount) || 0), 0);
   }, [localState.team]);
 
-  /* ── Shared button style ── */
+  /* ââ Shared button style ââ */
   const addBtnStyle = {
     marginTop: 16,
     padding: '10px 20px',
@@ -360,7 +360,7 @@ const Finances = ({ hubData, onSave }) => {
 
   return (
     <div style={{ maxWidth: '100%' }}>
-      {/* ════ PAGE TITLE ════ */}
+      {/* ââââ PAGE TITLE ââââ */}
       <div style={{ marginBottom: 32 }}>
         <h1 style={{ fontSize: 32, fontWeight: 700, color: '#1a1a1a', marginBottom: 8, fontFamily: 'Inter, -apple-system, BlinkMacSystemFont, sans-serif' }}>
           Finances & Profit First
@@ -370,9 +370,9 @@ const Finances = ({ hubData, onSave }) => {
         </p>
       </div>
 
-      {/* ════ SECTION 1: TAPS ════ */}
+      {/* ââââ SECTION 1: TAPS ââââ */}
       <Card>
-        <SectionHeader icon="💲" title="What Can Your Business Sustainably Support?" />
+        <SectionHeader icon="ð²" title="What Can Your Business Sustainably Support?" />
         <p style={{ fontSize: 14, color: '#666', marginBottom: 20, lineHeight: 1.6 }}>
           Enter your GCI and cost of sale. This will show you exactly what you should be paying yourself, setting aside for taxes, keeping as profit, and spending on your business.
         </p>
@@ -415,7 +415,7 @@ const Finances = ({ hubData, onSave }) => {
           </div>
         </div>
 
-        {/* Net Profit display — only when both values are entered */}
+        {/* Net Profit display â only when both values are entered */}
         {gciNum > 0 && (
           <div style={{
             background: netProfit >= 0 ? '#f0fdf4' : '#fef2f2',
@@ -484,7 +484,7 @@ const Finances = ({ hubData, onSave }) => {
           </div>
         </div>
 
-        {/* BUDGET BREAKDOWN — dollar amounts per category */}
+        {/* BUDGET BREAKDOWN â dollar amounts per category */}
         {gciNum > 0 && (
           <div style={{ marginTop: 24, marginBottom: 8 }}>
             <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 16, color: '#333', textTransform: 'uppercase' }}>
@@ -586,9 +586,9 @@ const Finances = ({ hubData, onSave }) => {
         </div>
       </Card>
 
-      {/* ════ SECTION 2: SYSTEMS & TEAM ════ */}
+      {/* ââââ SECTION 2: SYSTEMS & TEAM ââââ */}
       <Card>
-        <SectionHeader icon="📋" title="Systems & Team Investment" />
+        <SectionHeader icon="ð" title="Systems & Team Investment" />
         <p style={{ fontSize: 14, color: '#666', marginBottom: 24, lineHeight: 1.6 }}>
           Every system you pay for and every person on your team is an investment. Enter the monthly cost for each one and see the 4x ROI needed to justify that spend.
         </p>
@@ -596,7 +596,7 @@ const Finances = ({ hubData, onSave }) => {
         {/* YOUR SYSTEMS */}
         <div style={{ marginBottom: 32 }}>
           <p style={{ fontSize: 13, fontWeight: 700, marginBottom: 16, color: '#333', display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span>⚙️</span> <span style={{ textTransform: 'uppercase' }}>Your Systems</span>
+            <span>âï¸</span> <span style={{ textTransform: 'uppercase' }}>Your Systems</span>
           </p>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
             {(localState.systems || []).map((system) => {
@@ -609,7 +609,9 @@ const Finances = ({ hubData, onSave }) => {
                 }}>
                   <span style={{ fontSize: 14, color: '#333', fontWeight: 500 }}>{system.name}</span>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <input
+                    <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: 4, width: 100 }}>
+                      <span style={{ padding: '0 6px 0 8px', color: '#999', fontWeight: 600, fontSize: 13 }}>$</span>
+                      <input
                       type="text"
                       inputMode="numeric"
                       value={amt > 0 ? amt : ''}
@@ -620,9 +622,10 @@ const Finances = ({ hubData, onSave }) => {
                         );
                         updateField('systems', updated);
                       }}
-                      placeholder="$/mo"
-                      style={{ width: 80, padding: '8px 10px', border: '1px solid #ddd', borderRadius: 4, fontSize: 13, outline: 'none', textAlign: 'right' }}
+                      placeholder="0/mo"
+                      style={{ flex: 1, padding: '8px 10px', border: 'none',  fontSize: 13, outline: 'none', textAlign: 'right' }}
                     />
+                    </div>
                     {roiNeeded > 0 && (
                       <div style={{
                         background: '#1a1a1a', color: '#fff', padding: '6px 12px', borderRadius: 6,
@@ -668,7 +671,9 @@ const Finances = ({ hubData, onSave }) => {
                     {member.role && <p style={{ fontSize: 12, color: '#999', margin: '2px 0 0 0' }}>{member.role}</p>}
                   </div>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                    <input
+                    <div style={{ display: 'flex', alignItems: 'center', border: '1px solid #ddd', borderRadius: 4, width: 100 }}>
+                      <span style={{ padding: '0 6px 0 8px', color: '#999', fontWeight: 600, fontSize: 13 }}>$</span>
+                      <input
                       type="text"
                       inputMode="numeric"
                       value={amt > 0 ? amt : ''}
@@ -679,9 +684,10 @@ const Finances = ({ hubData, onSave }) => {
                         );
                         updateField('team', updated);
                       }}
-                      placeholder="$/mo"
-                      style={{ width: 80, padding: '8px 10px', border: '1px solid #ddd', borderRadius: 4, fontSize: 13, outline: 'none', textAlign: 'right' }}
+                      placeholder="0/mo"
+                      style={{ flex: 1, padding: '8px 10px', border: 'none',  fontSize: 13, outline: 'none', textAlign: 'right' }}
                     />
+                    </div>
                     {roiNeeded > 0 && (
                       <div style={{
                         background: '#1a1a1a', color: '#fff', padding: '6px 12px', borderRadius: 6,
@@ -721,9 +727,9 @@ const Finances = ({ hubData, onSave }) => {
         )}
       </Card>
 
-      {/* ════ SECTION 3: EXPENSE CATEGORIES ════ */}
+      {/* ââââ SECTION 3: EXPENSE CATEGORIES ââââ */}
       <Card>
-        <SectionHeader icon="📁" title="Expense Categories to Track" />
+        <SectionHeader icon="ð" title="Expense Categories to Track" />
         <p style={{ fontSize: 14, color: '#666', marginBottom: 20, lineHeight: 1.6 }}>
           Track these buckets in your bookkeeping tool. Whether it's QuickBooks, Relay, Wave, or a spreadsheet, these categories need to exist.
         </p>
@@ -749,9 +755,9 @@ const Finances = ({ hubData, onSave }) => {
         </div>
       </Card>
 
-      {/* ════ SECTION 4: SOP ════ */}
+      {/* ââââ SECTION 4: SOP ââââ */}
       <Card>
-        <SectionHeader icon="📄" title="Income & Expense Tracking SOP" />
+        <SectionHeader icon="ð" title="Income & Expense Tracking SOP" />
         <p style={{ fontSize: 14, color: '#666', marginBottom: 24, lineHeight: 1.6 }}>
           Your standard operating procedure for tracking money. Edit the tasks, assign WHO is responsible, and make it yours.
         </p>
@@ -759,7 +765,7 @@ const Finances = ({ hubData, onSave }) => {
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {(localState.sops || []).map((sop) => (
             <div key={sop.id} style={{ border: '1px solid #e5e2db', borderRadius: 8, padding: 20, background: '#fff' }}>
-              {/* Top row: Frequency pill + WHO pill + trash — all on same line */}
+              {/* Top row: Frequency pill + WHO pill + trash â all on same line */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
                 <input
                   type="text"
@@ -798,7 +804,7 @@ const Finances = ({ hubData, onSave }) => {
                   onMouseOver={(e) => e.currentTarget.style.color = '#c44'}
                   onMouseOut={(e) => e.currentTarget.style.color = '#ccc'}
                 >
-                  🗑
+                  ð
                 </button>
               </div>
 
@@ -834,9 +840,9 @@ const Finances = ({ hubData, onSave }) => {
   );
 };
 
-/* ═══════════════════════════════════════════════════════
+/* âââââââââââââââââââââââââââââââââââââââââââââââââââââââ
    ERROR BOUNDARY
-   ═══════════════════════════════════════════════════════ */
+   âââââââââââââââââââââââââââââââââââââââââââââââââââââââ */
 
 class FinancesErrorBoundary extends React.Component {
   constructor(props) {
