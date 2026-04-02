@@ -69,6 +69,63 @@ const WF_KEYS = [
   'active-listing','open-house','seller-contract','buyer-contract',
 ]
 
+/* ═══ CUSTOM WORKFLOW HELPERS ═══ */
+
+function customWfKey(name) {
+  return 'custom-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/-+$/,'')
+}
+
+/** Map category names to the sidebar section label they belong under */
+const CATEGORY_TO_SECTION = {
+  Transactions: 'TRANSACTIONS',
+  Closing: 'CLOSING',
+  Growth: 'GROWTH',
+  Marketing: 'MARKETING',
+  Operations: 'OPERATIONS',
+}
+
+/** Build sidebar with custom workflows injected under their category sections */
+function buildSidebar(customWorkflows) {
+  const base = [...SIDEBAR]
+  if (!customWorkflows || customWorkflows.length === 0) return base
+
+  const grouped = {}
+  customWorkflows.forEach(cw => {
+    const section = CATEGORY_TO_SECTION[cw.category] || cw.category?.toUpperCase() || 'OPERATIONS'
+    if (!grouped[section]) grouped[section] = []
+    grouped[section].push({ key: customWfKey(cw.name), label: cw.name })
+  })
+
+  const result = []
+  let currentSection = ''
+  for (let i = 0; i < base.length; i++) {
+    const item = base[i]
+    if (item.section !== undefined) {
+      if (currentSection && grouped[currentSection]) {
+        grouped[currentSection].forEach(cw => result.push(cw))
+        delete grouped[currentSection]
+      }
+      currentSection = item.section
+    }
+    result.push(item)
+  }
+  if (currentSection && grouped[currentSection]) {
+    const setupIdx = result.findIndex(r => r.key === 'setup')
+    const insertIdx = setupIdx >= 0 ? setupIdx : result.length
+    grouped[currentSection].forEach(cw => result.splice(insertIdx, 0, cw))
+    delete grouped[currentSection]
+  }
+
+  Object.entries(grouped).forEach(([section, items]) => {
+    const setupIdx = result.findIndex(r => r.key === 'setup')
+    const emptyDivIdx = result.findIndex((r, idx) => idx > 0 && r.section === '' && idx > result.length - 5)
+    const insertIdx = emptyDivIdx >= 0 ? emptyDivIdx : (setupIdx >= 0 ? setupIdx : result.length)
+    result.splice(insertIdx, 0, { section }, ...items)
+  })
+
+  return result
+}
+
 /* ═══ HELPERS ═══ */
 
 function matchWfKeys(allData, pageKey) {
@@ -670,10 +727,15 @@ export default function App() {
   const brandGuidelines = hubData.allData?.['brand-guidelines'] || meta.brandGuidelines || {}
   const uploadedLogo = (brandGuidelines.logos && brandGuidelines.logos.length > 0) ? brandGuidelines.logos[0].url : null
 
-  const currentItem = SIDEBAR.find(s => s.key === activePage)
+  // Build dynamic sidebar including custom workflows
+  const customWorkflows = meta.customWorkflows || []
+  const dynamicSidebar = buildSidebar(customWorkflows)
+  const customWfKeys = customWorkflows.map(cw => customWfKey(cw.name))
+
+  const currentItem = dynamicSidebar.find(s => s.key === activePage)
   const currentSection = (() => {
     let sec = ''
-    for (const s of SIDEBAR) {
+    for (const s of dynamicSidebar) {
       if (s.section !== undefined) sec = s.section
       if (s.key === activePage) return sec
     }
@@ -704,6 +766,14 @@ export default function App() {
       case 'setup': return <Setup hubData={hubData} onSave={handleSave} />
       default:
         if (WF_KEYS.includes(activePage)) return <WorkflowEditor pageKey={activePage} hubData={hubData} onSave={handleSave} onNavigate={(page) => setActivePage(page)} />
+        if (customWfKeys.includes(activePage)) {
+          const cwName = customWorkflows.find(cw => customWfKey(cw.name) === activePage)?.name || activePage
+          if (!hubData.allData?.[activePage]) {
+            const initData = { ...hubData.allData, [activePage]: { name: cwName, nodes: [] } }
+            handleSave({ allData: initData })
+          }
+          return <WorkflowEditor pageKey={activePage} hubData={hubData} onSave={handleSave} onNavigate={(page) => setActivePage(page)} />
+        }
         return <PlaceholderPage title={currentItem?.label || 'Coming Soon'} />
     }
   }
@@ -724,7 +794,7 @@ export default function App() {
         </div>
 
         <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 8 }}>
-          {SIDEBAR.map((item, idx) => {
+          {dynamicSidebar.map((item, idx) => {
             if (item.section !== undefined) {
               if (!item.section) return <div key={idx} style={{ height: 8 }} />
               return <div key={idx} className="sidebar-section">{item.section}</div>
