@@ -1,0 +1,133 @@
+{
+  "topLevel": {
+    "systems": [
+      {"id":"s1","name":"CRM"},{"id":"s2","name":"Email"},{"id":"s3","name":"Phone"},
+      {"id":"s4","name":"Calendar"},{"id":"s5","name":"MLS"},{"id":"s6","name":"Document Signing"},
+      {"id":"s7","name":"Text/SMS"},{"id":"s8","name":"Showing App"},{"id":"s9","name":"Transaction Management"},
+      {"id":"s10","name":"Canva/Design"},{"id":"s11","name":"Zoom/Video"},{"id":"s12","name":"Social Media"},
+      {"id":"sys1775050485265","name":"Brivity"},
+      "CRM","Calendar","Canva/Design","Zoom/Video","Document Signing","Phone","MLS","Showing App","Transaction Management","Email","Social Media","Google/Zillow"
+    ],
+    "roleColors": {
+      "admin": {"color":"#ec98a3","textColor":"#1A1A1A"},
+      "agent": {"color":"#c3d59f","textColor":"#FFFFFF"},
+      "automated": {"color":"#fae2df","textColor":"#1A1A1A"}
+    },
+    "customRoles": [],
+    "hubBranding": {
+      "accent":"#f3f2f0","teamName":"COREOPS","whoColor":"#ec98a3","whatColor":"#d1b8a2",
+      "teamAbbrev":"CO","whereColor":"#fae2df","accentLight":"#d1b8a2",
+      "sidebarColor":"#c3d59f","sidebarTextColor":"#FFFFFF"
+    },
+    "links": [
+      {"id":"lnk1","url":"","label":"Calendar Scheduling"},
+      {"id":"lnk2","url":"","label":"Canva"},
+      {"id":"lnk3","url":"","label":"Pre-Consultation Form"}
+    ],
+    "teamMembers": [{"id":"tm1775050404299","name":"Mikayla Drinkwine","role":"Agent"}],
+    "pastClients": [],
+    "soiContacts": [],
+    "businessResources": [],
+    "hiddenSections": [],
+    "customSections": []
+  },
+  "allDataKeys": [
+    "finances","pipeline","snapshot","crm-setup","cfl-annual","cfl-events","open-house",
+    "brand-voice","cfl-90-days","cfl-monthly","pre-listing","cfl-personal","lead-magnets",
+    "lead-sources","past-clients","cfl-quarterly","email-library","active-listing",
+    "buyer-contract","cfl-post-close","agent-referrals","client-for-life","core-foundation",
+    "seller-contract","target-audience","brand-guidelines","listing-marketing",
+    "buyer-consultation","seller-consultation","vendor-partnerships",
+    "agent-referral-inbound","agent-referral-outbound"
+  ],
+  "workflowNodeCounts": {
+    "cfl-annual": 7, "open-house": 18, "cfl-90-days": 7, "cfl-monthly": 3,
+    "pre-listing": 23, "cfl-personal": 6, "cfl-quarterly": 9, "active-listing": 17,
+    "buyer-contract": 58, "cfl-post-close": 14, "seller-contract": 60,
+    "buyer-consultation": 20, "seller-consultation": 14,
+    "agent-referral-inbound": 10, "agent-referral-outbound": 8
+  },
+  "cflPhasesStructure": {
+    "cfl-annual": {"keys": ["nodes"]},
+    "cfl-events": {"keys": ["events","popbySends","popbyClients"]},
+    "cfl-90-days": {"keys": ["nodes"]},
+    "cfl-monthly": {"keys": ["nodes"]},
+    "cfl-personal": {"keys": ["nodes","stickyNote"]},
+    "cfl-quarterly": {"keys": ["nodes"]},
+    "cfl-post-close": {"keys": ["nodes"]}
+  },
+  "cflEventsStructure": {
+    "events": [
+      {
+        "id": "evt-1774402746958",
+        "name": "Backyard BBQ",
+        "taskCount": 22,
+        "taskStructure": {"id":"","name":"","notes":"","owner":"","status":"pending","dueDate":""}
+      }
+    ],
+    "popbySends": [
+      {
+        "sampleStructure": {"id":"","date":"","item":"","name":"","type":"pop-by|mail-by","notes":"","status":"planning","targetZips":[],"targetTypes":[]}
+      }
+    ],
+    "popbyClients": []
+  },
+  "financesStructure": {
+    "gci": 350000,
+    "taxPercent": 25,
+    "profitPercent": 10,
+    "costOfSale": 25000,
+    "ownerPayPercent": 50,
+    "systemCosts": {},
+    "teamCosts": {},
+    "manualExpenses": [],
+    "expenseCategories": [
+      {"id":1,"name":"Marketing & Advertising"},
+      {"id":2,"name":"Technology & Software"},
+      {"id":3,"name":"Education & Training"},
+      {"id":4,"name":"Office & Administrative"},
+      {"id":5,"name":"Client Gifts & Events"},
+      {"id":6,"name":"Insurance & Legal"},
+      {"id":7,"name":"Miscellaneous"}
+    ],
+    "sops": [],
+    "team": [],
+    "systems": [],
+    "bookkeepingTool": "",
+    "tapsGCI": 350000,
+    "tapsExpanded": false,
+    "tapsTaxPct": 25,
+    "tapsProfitPct": 10,
+    "tapsCostOfSale": 25000,
+    "tapsOwnerPayPct": 50,
+    "extraTeamExpenses": [],
+    "extraSystemExpenses": []
+  },
+  "snapshotStructure": {
+    "ytdGCI":"","goalGCI":"","totalCap":"","goalUnits":"","avgCommPct":"",
+    "lastYearGCI":"","avgCostBuyer":"","businessName":"","avgCostSeller":"",
+    "avgSalesPrice":"","goalNetIncome":"","topLeadSources":"","totalCapAmount":"1500",
+    "buyerConvSetHeld":"","lastYearNetIncome":"475000","totalUnitsAllTime":"",
+    "lastYearCostOfSale":"25000","listingConvSetHeld":"",
+    "perTransactionFees":[{"id":"1775058373796","amount":"345","feeName":"sa"}],
+    "lastYearBuyersClosed":"","listingConvHeldSigned":"",
+    "inboundReferralsClosed":"","lastYearListingsClosed":"",
+    "listingConvSignedClosed":"","outboundReferralsClosed":""
+  },
+  "emailLibraryStructure": {
+    "totalTemplates": 3,
+    "templateKeys": ["bc4","pl8","wf-al-live"],
+    "templateFields": ["body","notes","preview","subject"]
+  },
+  "metaKeys": [
+    "crmSetup","finances","pipeline","snapshot","audiences","brandVoice","coreValues",
+    "quickNotes","clientForLife","agentReferrals","coreFoundation","vendorPartners",
+    "brandGuidelines","listingMarketing","onboardingChecklist"
+  ],
+  "clientForLifeData": {
+    "pastClients": [
+      {"id":"1775090005610","name":"","type":"client","status":"Active","closeDate":"","referrals":0,"clientType":"","referredBy":""},
+      {"id":"1775090018001","name":"","type":"soi","status":"Active","closeDate":"","referrals":0,"clientType":"","referredBy":""}
+    ]
+  }
+}
