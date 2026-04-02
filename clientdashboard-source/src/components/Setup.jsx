@@ -736,8 +736,10 @@ function CustomWorkflows({ hubData, onSave }) {
           style={{ ...inputStyle, minWidth: '150px' }}
         >
           <option value="Transactions">Transactions</option>
-          <option value="Marketing">Marketing</option>
+          <option value="Closing">Closing</option>
           <option value="Growth">Growth</option>
+          <option value="Marketing">Marketing</option>
+          <option value="Operations">Operations</option>
         </select>
         <button style={yellowButtonStyle} onClick={handleAddWorkflow}>
           + Add Workflow
