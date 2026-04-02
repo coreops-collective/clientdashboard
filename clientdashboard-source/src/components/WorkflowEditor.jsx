@@ -671,30 +671,9 @@ function WfCard({ node, stepLabel, isSelected, onSelect, onMoveUp, onMoveDown, o
           </div>
         )}
 
-        {/* Action controls - visible on hover */}
+        {/* Action controls - visible on hover (role is changed via the pill/badge above) */}
         {hovered && (
           <div style={{ display: 'flex', gap: 6, justifyContent: 'flex-start', marginTop: 8 }}>
-            {/* Role Dropdown */}
-            <select
-              value={role}
-              onChange={handleRoleChange}
-              onClick={e => e.stopPropagation()}
-              style={{
-                padding: '4px 8px',
-                borderRadius: 4,
-                backgroundColor: 'transparent',
-                color: '#666',
-                fontSize: 10,
-                fontWeight: 600,
-                border: `1px solid ${accentColor}`,
-                cursor: 'pointer',
-              }}
-            >
-              {(availableRoles || OWNER_OPTIONS).map(r => (
-                <option key={r} value={r}>{OWNER_LABELS[r] || r}</option>
-              ))}
-            </select>
-
             {/* Convert to Subtask button */}
             {onConvertToSubtask && !node.isSubtask && (
               <button
